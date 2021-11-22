@@ -1,5 +1,6 @@
 # php mq utils
 #### How To Use PulsarClient(pulsar websocket)
+[pulsar websocket](https://pulsar.apache.org/docs/en/client-libraries-websocket/)
 ```php
   $a=PulsarClient::getInstance()
     ->setConf([
