@@ -1,0 +1,23 @@
+{
+    "name": "ctzpack/zzmqtool",
+    "description": "zzmqtool",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "textalk/websocket": "^1.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ctz",
+            "email": "jsycctz@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload":{
+        "psr-4":{
+            "Pack\\Tool\\":"src/"
+        }
+    }
+
+}
