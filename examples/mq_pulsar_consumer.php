@@ -14,10 +14,7 @@ $a=PulsarClient::getInstance()
         "namespace"=>"socket_namespace",
         "topic"=>"socket_topic",
         "subname"=>"ctz_test",
-    ]);
-
-$a->consumerMsg(function ($msgReceive){
-    //print_r($msg);
-    echo base64_decode($msgReceive['payload']).PHP_EOL;
-    return true;
-});
+    ])->consumerMsg(function ($msgReceive){
+        echo base64_decode($msgReceive['payload']).PHP_EOL;
+        return true;
+    });
