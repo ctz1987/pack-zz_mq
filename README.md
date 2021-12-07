@@ -28,3 +28,31 @@
 
 
 ```
+#### How To Use PulsarClient(pulsar swoole websocket)
+```
+$a=SwoolePulsarClient::getInstance()
+    ->setConf([
+        "host" => "111.111.0.60",
+        "port"=>  "8080",
+        "tenant"=>"socket",
+        "namespace"=>"socket_namespace",
+        "topic"=>"socket_topic",
+        "subname"=>"ctz_test",
+    ]);
+for($i=0;$i<30;$i++) {
+    $a->producerMsg(["ddd2"=>$i,"ddd" => date("Y-m-d H:i:s")]);
+}
+
+SwoolePulsarClient::getInstance()
+    ->setConf([
+        "host" => "111.111.0.60",
+        "port"=>  "8080",
+        "tenant"=>"socket",
+        "namespace"=>"socket_namespace",
+        "topic"=>"socket_topic",
+        "subname"=>"ctz_test",
+    ])->consumerMsg(function ($msgReceive){
+        echo base64_decode($msgReceive['payload']).PHP_EOL;
+        return true;
+    });
+```
