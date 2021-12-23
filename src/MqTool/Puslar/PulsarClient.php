@@ -91,7 +91,7 @@ final class PulsarClient
     protected function getConsumerWSUrl(){
         if($this->checkConfig($this->pulsarConf)){
             return sprintf(
-                "ws://%s/ws/v2/consumer/persistent/%s/%s/%s/%s",
+                "ws://%s/ws/v2/consumer/persistent/%s/%s/%s/%s?subscriptionType=Shared",
                 $this->pulsarConf['url'],$this->pulsarConf['tenant'],$this->pulsarConf['namespace'],$this->pulsarConf['topic'],$this->pulsarConf['subname'] ?? ""
             );
         }
@@ -131,7 +131,7 @@ final class PulsarClient
             if(isset($pulsarConsumerClients[$wsUrlHash])){
                 return $pulsarConsumerClients[$wsUrlHash];
             }else{
-                $pulsarConsumerClients[$wsUrlHash]=new Client($wsUrl);
+                $pulsarConsumerClients[$wsUrlHash]=new Client($wsUrl,["timeout"=>10]);
                 return $pulsarConsumerClients[$wsUrlHash];
             }
         }
@@ -185,6 +185,9 @@ final class PulsarClient
         while (true) {
             try {
                 $result = $consumerClient->receive();
+                if($result==null){
+                    continue;
+                }
                 $resultArray = json_decode($result, true);
                 $functionResult = call_user_func($func, $resultArray);
                 if ($functionResult) {
