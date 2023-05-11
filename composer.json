@@ -4,7 +4,7 @@
     "type": "library",
     "require": {
         "php": ">=7.0",
-        "textalk/websocket": "^1.5"
+        "textalk/websocket": "1.5.8"
     },
     "license": "MIT",
     "authors": [
